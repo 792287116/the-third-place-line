@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#090b0a" />
+    <meta name="description" content="《第三口人》——台风夜里的第一人称心理恐怖游戏。" />
+    <title>第三口人</title>
+    <script type="module" crossorigin src="/assets/index-BFtzW4vL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-l1ebIjjH.css">
+  </head>
+  <body>
+    <div id="game"></div>
+
+    <section id="title-screen" class="screen is-visible" aria-label="游戏开始画面">
+      <div class="title-shade"></div>
+      <div class="title-copy">
+        <p class="eyebrow">THE THIRD PLACE · 5 栋 502</p>
+        <h1>第三口人</h1>
+        <p class="tagline">家里不是闹鬼。<br />是少承认了一口人。</p>
+        <button id="start-button" class="primary-button">回家</button>
+        <button id="continue-checkpoint" class="checkpoint-button is-hidden">从 23:50 继续</button>
+        <div class="quality-options" role="group" aria-label="渲染画质">
+          <button data-quality="smooth">流畅优先</button>
+          <button data-quality="quality">画质优先</button>
+        </div>
+        <p class="mobile-guide">左手摇杆移动 · 右侧滑动查看<br />点门和物品上的提示，直接互动。摇杆推满可快走。</p>
+        <p class="content-note">建议佩戴耳机 · 包含压迫氛围与突发音效</p>
+      </div>
+      <div class="controls-card">
+        <span><kbd>WASD</kbd> 行走</span>
+        <span><kbd>鼠标</kbd> 查看</span>
+        <span><kbd>E</kbd> 互动</span>
+        <span><kbd>F</kbd> 手电</span>
+        <span><kbd>R</kbd> 回拨</span>
+        <span><kbd>P</kbd> 手机</span>
+      </div>
+    </section>
+
+    <section id="loading-screen" class="screen" aria-live="polite">
+      <div class="loading-mark"></div>
+      <p>楼道的灯，慢了半拍。</p>
+      <div class="loading-track"><i id="loading-fill"></i></div>
+      <small id="loading-label">正在载入 5 栋……</small>
+      <button id="loading-retry" class="primary-button is-hidden">重新载入</button>
+    </section>
+
+    <div id="hud" class="is-hidden" aria-hidden="true">
+      <div id="chapter">
+        <span id="chapter-number">第一幕</span>
+        <strong id="chapter-title">回家</strong>
+      </div>
+      <div id="clock"><span>台风夜</span><strong id="clock-time">22:17</strong></div>
+      <div id="objective"><span>当前</span><p id="objective-text">找到 502</p></div>
+      <button id="phone-status" type="button" aria-label="查看林晚的手机"><span class="phone-dot"></span> 妈妈 · 最后通话 22:17 <kbd>P</kbd></button>
+      <div id="crosshair" aria-hidden="true"><i></i><b></b></div>
+      <div id="interaction-prompt"><kbd>E</kbd><span>互动</span></div>
+      <div id="flashlight-state"><span></span>手机照明</div>
+      <div id="subtitle"></div>
+      <div id="inventory-note" aria-live="polite"></div>
+      <div id="timer" class="is-hidden"><span>午夜前离开</span><strong id="timer-value">01:15</strong></div>
+    </div>
+
+    <div id="pause-hint" class="is-hidden">点击画面继续</div>
+
+    <button id="menu-button" class="is-hidden" aria-label="暂停与设置">暂停 <span id="fps-value"></span></button>
+    <div id="interaction-hotspots" class="is-hidden" role="group" aria-label="场景中的可点击提示"></div>
+    <div id="touch-controls" class="is-hidden" aria-label="触屏控制">
+      <div id="move-stick" role="group" aria-label="移动摇杆，向前推满快走"><i id="stick-knob"></i><span>移动 · 推满快走</span></div>
+      <div class="touch-tools" role="group" aria-label="手机工具">
+        <button id="touch-flashlight" data-action="flashlight" aria-label="手机照明" aria-pressed="true">手电</button>
+        <button data-action="phone" class="story-control" aria-label="查看手机与回拨妈妈">手机</button>
+      </div>
+      <span id="touch-look-hint">滑动查看 · 点物品上的提示</span>
+    </div>
+
+    <section id="game-menu" class="is-hidden" role="dialog" aria-modal="true" aria-labelledby="menu-title">
+      <div class="game-menu-card">
+        <p class="eyebrow">THE THIRD PLACE · 暂停</p>
+        <h2 id="menu-title">歇一口气。</h2>
+        <p id="performance-label"></p>
+        <div class="quality-options" role="group" aria-label="暂停时调整画质">
+          <button data-quality="smooth">流畅优先</button>
+          <button data-quality="quality">画质优先</button>
+        </div>
+        <p class="settings-note">流畅档降低渲染分辨率与反射开销；模型和贴图不变。<br />若发热或卡顿，请使用流畅档。切换不重开游戏。</p>
+        <fieldset class="audio-settings">
+          <legend>声音</legend>
+          <label for="music-volume">背景音乐 <output id="music-volume-value" for="music-volume">55%</output></label>
+          <input id="music-volume" data-audio="music" type="range" min="0" max="100" value="55" />
+          <label for="effects-volume">雨声与音效 <output id="effects-volume-value" for="effects-volume">65%</output></label>
+          <input id="effects-volume" data-audio="effects" type="range" min="0" max="100" value="65" />
+          <label for="voice-volume">角色语音 <output id="voice-volume-value" for="voice-volume">100%</output></label>
+          <input id="voice-volume" data-audio="voice" type="range" min="0" max="100" value="100" />
+          <div class="audio-auditions"><button data-audition="music">试听配乐</button><button data-audition="voice">试听人声</button></div>
+          <p id="audio-status" role="status">进入游戏后开启声音</p>
+        </fieldset>
+        <div class="menu-actions">
+          <button id="resume-button" class="primary-button">继续游戏</button>
+          <button id="fullscreen-button" class="mobile-only">进入全屏</button>
+        </div>
+      </div>
+    </section>
+
+    <aside id="rotate-hint" aria-label="横屏提示">
+      <span class="rotate-phone" aria-hidden="true"></span>
+      <h2>把手机横过来。</h2>
+      <p>戴上耳机，再走进 502。<br />旋转屏幕后即可继续。</p>
+      <button id="rotate-fullscreen" class="primary-button">全屏游玩</button>
+    </aside>
+    <aside id="context-warning" class="is-hidden" role="alert">
+      <h2>画面暂时中断</h2>
+      <p>系统释放了图形资源。重新载入会回到游戏开头。</p>
+      <button id="context-reload" class="primary-button">重新载入</button>
+    </aside>
+
+    <nav id="art-toolbar" class="is-hidden" aria-label="美术场景预览">
+      <div><small>ART STUDY · 实时 3D</small><strong id="art-view-name">饭厅</strong></div>
+      <button data-view="dining">饭厅</button>
+      <button data-view="bathroom">盥洗室</button>
+      <button data-view="stairs">楼梯间</button>
+      <button data-view="hallway">楼道</button>
+      <a href="./">返回游戏</a>
+      <span>拖动查看 · WASD 移动 · F 手电 · Esc 释放鼠标</span>
+    </nav>
+
+    <div id="modal" class="modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div id="modal-card" class="modal-card">
+        <p id="modal-kicker" class="modal-kicker">发现</p>
+        <h2 id="modal-title"></h2>
+        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-actions" class="modal-actions"></div>
+      </div>
+    </div>
+
+    <div id="peephole" class="is-hidden" aria-hidden="true">
+      <div class="peephole-view">
+        <div class="hall-light"></div>
+        <div class="man-silhouette"><i></i><b></b></div>
+        <p>别开门。</p>
+      </div>
+    </div>
+
+    <div id="look-away" class="is-hidden"><span>别数照片里的人</span><div><i></i></div></div>
+    <div id="damage-flash"></div>
+    <button id="ritual-grip" class="is-hidden" aria-label="抓牢碗；按住不给，松手给它"><span>抓牢碗 · 按住不给</span><small>电脑按住 E · 手机按住这里<br />松手，就把碗给它</small><i></i></button>
+    <div id="ending-blackout" class="is-hidden" aria-hidden="true"></div>
+    <div id="film" aria-hidden="true"></div>
+
+    <section id="ending" class="screen" aria-live="polite">
+      <div class="ending-shade"></div>
+      <div class="ending-copy">
+        <p id="ending-code" class="eyebrow"></p>
+        <h2 id="ending-title"></h2>
+        <p id="ending-body"></p>
+        <button id="restart-button" class="primary-button">再回去一次</button>
+        <button id="retry-checkpoint" class="checkpoint-button is-hidden">从 23:50 重试</button>
+      </div>
+    </section>
+
+  </body>
+</html>
