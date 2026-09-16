@@ -8,8 +8,8 @@
     <meta name="theme-color" content="#090b0a" />
     <meta name="description" content="《第三口人》——台风夜里的第一人称心理恐怖游戏。" />
     <title>第三口人</title>
-    <script type="module" crossorigin src="/assets/index-BFtzW4vL.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-l1ebIjjH.css">
+    <script type="module" crossorigin src="/assets/game-CeTv2SgI.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/game-Cvu2SHi8.css">
   </head>
   <body>
     <div id="game"></div>
@@ -145,7 +145,7 @@
 
     <div id="look-away" class="is-hidden"><span>别数照片里的人</span><div><i></i></div></div>
     <div id="damage-flash"></div>
-    <button id="ritual-grip" class="is-hidden" aria-label="抓牢碗；按住不给，松手给它"><span>抓牢碗 · 按住不给</span><small>电脑按住 E · 手机按住这里<br />松手，就把碗给它</small><i></i></button>
+    <button id="ritual-grip" class="is-hidden" aria-label="抓牢碗；按住不给，松手给它"><span>抓牢碗 · 按住不给</span><small><span id="ritual-input-hint">持续按住 E，抓牢碗</span><br />松手，就把碗给它</small><i></i></button>
     <div id="ending-blackout" class="is-hidden" aria-hidden="true"></div>
     <div id="film" aria-hidden="true"></div>
 
@@ -155,6 +155,13 @@
         <p id="ending-code" class="eyebrow"></p>
         <h2 id="ending-title"></h2>
         <p id="ending-body"></p>
+        <div id="ending-memory" class="is-hidden">
+          <p id="portrait-status" role="status"></p>
+          <img id="portrait-preview" class="is-hidden" alt="下次全家福中的脸" />
+          <label class="portrait-label">留下一张脸（可选）<input id="ending-portrait" type="file" accept="image/jpeg,image/png,image/webp" /></label>
+          <button id="remove-portrait" class="checkpoint-button">使用原照片</button>
+          <small>使用居中的正面照片，自动裁为竖幅。仅在此浏览器处理与保存。</small>
+        </div>
         <button id="restart-button" class="primary-button">再回去一次</button>
         <button id="retry-checkpoint" class="checkpoint-button is-hidden">从 23:50 重试</button>
       </div>
