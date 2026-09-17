@@ -1,3 +1,6 @@
 {
-  "version": "0.2.0"
+  "site": "downloads",
+  "version": "1.0.0",
+  "preparedGameVersion": "0.3.0-native-alpha.2",
+  "releases": "https://github.com/792287116/the-third-place-line/releases"
 }
