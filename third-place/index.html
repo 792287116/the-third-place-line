@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#111714" />
+    <meta name="theme-color" content="#080e0b" />
     <meta name="description" content="《第三口人》官方下载入口。台风夜，回到十几年没去过的家。下载 Windows、Mac M 系列、Mac Intel 与 Android 原生版本。" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="第三口人 · 游戏下载" />
@@ -12,46 +12,56 @@
     <link rel="canonical" href="https://game.runfello.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>第三口人 · 游戏下载</title>
-    <script type="module" crossorigin src="/assets/index-gxzg8bcT.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CJQmimcs.css">
+    <script type="module" crossorigin src="/assets/index-Y61SgZDy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B5kCNYky.css">
   </head>
   <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
     <header class="site-header shell">
-      <div class="wordmark"><span class="door-mark" aria-hidden="true">叁</span><span>第三口人<small>THE THIRD PLACE</small></span></div>
+      <div class="wordmark"><span class="door-mark" aria-hidden="true">叁</span><span class="wordmark-name">第三口人</span><span class="wordmark-en">THE THIRD PLACE</span></div>
       <span class="header-note">原生游戏 · 下载</span>
     </header>
     <main>
       <section class="hero shell" aria-labelledby="game-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="signal" aria-hidden="true"></span> 5 栋 · 502 <span class="eyebrow-divider">/</span> 台风夜</p>
-          <h1 id="game-title">第三口人<span>THE THIRD PLACE</span></h1>
+          <h1 id="game-title"><span class="title-cn">第三口人</span><span class="title-en">THE THIRD PLACE</span></h1>
           <p class="hero-line">妈妈在电话里说：<br />家里已经<span class="third">三口人</span>了。</p>
           <p class="hero-description">一段发生在老单元楼里的第一人称心理恐怖故事。<br class="desktop-break" />找回被藏起的线索，听清墙后的声音，在午夜前做出选择。</p>
           <div id="downloads" class="download-picker">
-            <fieldset class="platform-picker">
-              <legend>下载版本</legend>
-              <div class="platform-options">
-                <label><input type="radio" name="platform" value="windows" checked /><span>Windows</span></label>
-                <label><input type="radio" name="platform" value="mac-arm64" /><span>Mac · M 系列</span></label>
-                <label><input type="radio" name="platform" value="mac-intel" /><span>Mac · Intel</span></label>
-                <label><input type="radio" name="platform" value="android" /><span>Android</span></label>
-              </div>
-            </fieldset>
-            <p id="environment-hint" class="environment-hint">选择适合设备的版本</p>
-            <a id="download-button" class="button primary" role="button" aria-disabled="true" tabindex="-1"><span id="download-label">正在获取下载版本</span><span aria-hidden="true">↓</span></a>
+            <div class="download-heading">
+              <label for="platform-select">下载版本</label>
+              <span id="environment-hint" class="environment-hint">选择适合设备的版本</span>
+            </div>
+            <div class="platform-select-wrap">
+              <select id="platform-select" name="platform" aria-describedby="environment-hint">
+                <option value="windows">Windows</option>
+                <option value="mac-arm64">Mac · M 系列</option>
+                <option value="mac-intel">Mac · Intel</option>
+                <option value="android">Android</option>
+              </select>
+              <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m7 10 5 5 5-5" /></svg>
+            </div>
+            <a id="download-button" class="button primary" role="button" aria-disabled="true" tabindex="-1">
+              <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5" /></svg>
+              <span id="download-label">正在获取下载版本</span>
+              <svg class="download-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>
+            </a>
             <p id="download-status" class="download-status" role="status">正在检查安装包…</p>
             <button id="retry-download" class="retry-download" type="button" hidden>重新获取下载</button>
             <noscript><p class="download-status">请启用 JavaScript，以选择设备版本并下载游戏。</p></noscript>
           </div>
-          <p class="hero-note">原生游戏 <i aria-hidden="true">·</i> 单人离线 <i aria-hidden="true">·</i> 建议佩戴耳机</p>
+          <ul class="hero-notes" aria-label="游玩提示">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M8 6h8c2 0 3 1 3.5 3l1.5 8c.4 2-1.2 3-2.5 1.5L15.5 15h-7l-3 3.5C4.2 20 2.6 19 3 17l1.5-8C5 7 6 6 8 6Z" /><path d="M8 8v5m-2.5-2.5h5M15 9h.1M18 12h.1" stroke-linecap="round" /></svg>原生游戏</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="6.5" r="3.5" /><path d="M5 21v-3a7 7 0 0 1 14 0v3Z" /></svg>单人离线</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 15V11a8 8 0 0 1 16 0v4M7 12H4v8h3ZM17 12h3v8h-3Z" /></svg>建议佩戴耳机</li>
+          </ul>
         </div>
         <figure class="hero-scene">
           <div class="scene-frame"><img src="/images/502-alpha11.png" width="1280" height="720" fetchpriority="high" alt="502 客厅的木餐桌、三把空椅和三副碗筷，暖色吊灯映着窗边冷光" /><div class="scene-shade" aria-hidden="true"></div><span class="room-label" aria-hidden="true">502</span><span class="scene-time" aria-hidden="true">22:17</span></div>
-          <figcaption><span>一张饭桌，三个位置。</span><span>alpha.11 · 实机画面</span></figcaption>
+          <figcaption><span>一张饭桌，三个位置。</span><span class="scene-version">alpha.11 · 实机画面</span></figcaption>
         </figure>
       </section>
-
-      <div class="premise shell"><span>回来的路，你还记得。</span></div>
 
     </main>
   </body>
